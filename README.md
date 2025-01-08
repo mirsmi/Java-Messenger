@@ -21,6 +21,7 @@ A client-server chat program built in Java, following the MVC design pattern for
 
 ## Technologies, Patterns and Dependencies Used
 - Java: Core programming language.
+- Database: PgAdmin
 - PostgreSQL: Database for secure storage of user information.
 - PostgreSQL Driver: postgresql-42.7.4.jar.
 - MVC Design Pattern: Ensures clear separation between the user interface, business logic, and data management.
