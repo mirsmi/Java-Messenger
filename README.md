@@ -30,10 +30,46 @@ A client-server chat program built in Java, following the MVC design pattern for
 - MD5 Password Hashing: Utilizes the Encryptor class to hash passwords securely before storing them in the database.
 
 ## Please Note
-You will need to create your own database tables to run this application, as I have removed mine for security reasons. Ensure that your database schema aligns with the structure expected by the program (e.g., tables for users, messages, etc.).
+You will need to create your own database tables to run this application, as I have removed mine for security reasons. Ensure that your database schema aligns with the structure expected by the program (e.g., tables for users, messages, etc.). Create the tables using the following code:
+```
+--users
+CREATE TABLE users (
+    username VARCHAR(255) PRIMARY KEY,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_image BYTEA
+);
+
+--saved_contacts
+CREATE TABLE saved_contacts (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    contact VARCHAR(255) NOT NULL
+);
+
+--saved_chats
+CREATE TABLE saved_chats (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    sender VARCHAR(255) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    receiver VARCHAR(255) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    image BYTEA
+);
+
+```
 
 ### How to Run
 1. Clone the repository to your local machine.
 2. Download the postgresql.jar file and add it to your project's library settings in your IDE (e.g., IntelliJ, Eclipse).
 3. Configure the database connection by adding your PostgreSQL credentials.
 4. Run the Main controller to start the application.
+
+
+## SCREENSHOTS
+![Screenshot 2025-01-08 175632](https://github.com/user-attachments/assets/dab86da0-5d7b-4ae4-a906-9b852f549c70)
+![Screenshot 2025-01-08 175546](https://github.com/user-attachments/assets/4315b47e-dfff-4863-b55e-029ca7292241)
+![Screenshot 2025-01-08 175419](https://github.com/user-attachments/assets/e241ed3e-0c70-4ad1-b2ab-c8802fb3f510)
+![image](https://github.com/user-attachments/assets/bead9090-0aa6-4c72-8aa6-e1e41a1e9bdc)
+
